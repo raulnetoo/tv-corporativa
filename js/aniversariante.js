@@ -105,7 +105,7 @@ function displayAniversariante() {
     document.getElementById('aniversariante-setor').textContent = `Setor: ${dados.setor}`;
     document.getElementById('aniversariante-foto').src = dados.foto_url; 
     // Cor customizada pelo usuário
-    document.getElementById('secao-aniversariante').style.backgroundColor = '#79afceff'; 
+    //document.getElementById('secao-aniversariante').style.backgroundColor = '#79afceff'; 
 }
 
 
