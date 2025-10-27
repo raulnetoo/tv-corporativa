@@ -215,7 +215,7 @@ body {
     grid-column: 1/3;
     font-weight: bold;
     font-size: 1.1rem;
-    color: var(--cor-titulos);
+    /* color: var(--cor-titulos); */
     margin-bottom: 0.5rem;
 }
 

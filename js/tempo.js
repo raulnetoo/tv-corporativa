@@ -20,7 +20,7 @@ async function fetchWeatherData(endpoint) {
  */
 function getWeatherIcon(iconCode) {
     switch (iconCode) {
-        case '01d': return 'fas fa-sun'; // Céu limpo (dia)
+        case '01d': return 'fas fa-sun' ; // Céu limpo (dia)
         case '01n': return 'fas fa-moon'; // Céu limpo (noite)
         case '02d': 
         case '02n': return 'fas fa-cloud-sun'; // Poucas nuvens
