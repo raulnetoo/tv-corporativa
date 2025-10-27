@@ -17,7 +17,7 @@
 
 body {
     /*background-color: var(--fundo-principal);*/
-    background: url(/imgs/fundo/fun01.jpg) no-repeat center center / cover;
+    /*background: url(/imgs/fundo/fun01.jpg) no-repeat center center / cover;*/
     color: var(--cor-texto);
     font-family: Arial, sans-serif;
     margin: 0;
@@ -83,11 +83,49 @@ body {
     text-align: center;
 }
 
+/* style.css */
+
+/* ... (seus estilos existentes) ... */
+
+/* Horários */
 .hora_mundial {
     grid-row: 6/7;
     grid-column: 4/5;
+    /* NOVO: Centraliza o texto dentro da seção */
+    text-align: center; 
 }
 
+/* NOVO: Estilo para os Títulos dentro da seção Horários */
+.hora_mundial h3 {
+    margin-bottom: 1rem; /* Dá um pequeno espaço após o título */
+}
+
+/* NOVO: Estilo para o componente principal da hora */
+.hora_mundial .hora-valor {
+    /* Troca de 'Orbitron' para 'Dosis' */
+    font-family: 'Dosis', sans-serif; 
+    font-weight: 500; /* Uso de um peso mais leve para destacar a hora */
+    font-size: 1.8rem; /* Aumentado ligeiramente para mais impacto */
+    color: var(); 
+}
+
+/* NOVO: Estilo para cada linha de horário (ajuste) */
+.hora_mundial > div { 
+    font-size: 1.1rem; /* Reduzimos um pouco o tamanho do texto do local */
+    margin-bottom: 0.8rem; 
+    color: var(--cor-texto); 
+    /* Adicionamos Dosis aqui também para manter o visual uniforme */
+    font-family: 'Dosis', sans-serif; 
+}
+
+/* Mantém a data menor */
+.hora_mundial small {
+    display: block; 
+    font-size: 0.8rem;
+    font-weight: 500; /* Peso médio para a data */
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 0.2rem;
+}
 /* O layout da seção Tempo será redefinido abaixo */
 .prev_tempo {
     grid-row: 6/7;
