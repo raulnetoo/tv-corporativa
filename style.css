@@ -74,6 +74,22 @@ body {
     justify-content: space-around;
     flex-direction: row;
     text-align: center;
+    /* ESSENCIAL: Permite que o canvas flutue dentro dele */
+    position: relative; 
+    /* Garante que o confete não saia do container */
+    overflow: hidden;
+}
+
+.confetti-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Garante que o canvas fique no topo do conteúdo, mas abaixo dos elementos de texto/imagem */
+    z-index: 10; 
+    /* Torna o canvas clicável (caso você queira, mas confete.js gerencia isso) */
+    pointer-events: none; 
 }
 
 .dollar_hoje {

@@ -154,7 +154,10 @@ function displayAniversariante() {
     document.getElementById('aniversariante-nome').textContent = dados.nome;
     document.getElementById('aniversariante-data').textContent = `Dia ${diaAniversario} de ${nomeMesMaiusculo}`;
     document.getElementById('aniversariante-setor').textContent = `Setor: ${dados.setor}`;
-    document.getElementById('aniversariante-foto').src = dados.foto_url; 
+    document.getElementById('aniversariante-foto').src = dados.foto_url;
+    
+    // NOVO: Chama o confete toda vez que um novo aniversariante é exibido!
+    shootConfetti(); 
 }
 
 
@@ -178,4 +181,36 @@ function startAniversarianteLoop() {
     }
     
     loopCycle(); 
+}
+
+function shootConfetti() {
+    // 1. Pega o elemento canvas
+    const confettiCanvas = document.getElementById('confetti-canvas');
+    if (!confettiCanvas) return;
+
+    // 2. Cria uma instância de confete vinculada a esse canvas
+    // A variável global 'confetti' é injetada pelo script CDN
+    const myConfetti = confetti.create(confettiCanvas, { resize: true });
+
+    // 3. Dispara a chuva de confete (Personalize conforme quiser)
+myConfetti({
+        particleCount: 50, 
+        spread: 80,
+        origin: { y: 0, x: 0.5 },
+        gravity: 0.7,
+        ticks: 300, // Mais longo
+        colors: ['#2dd3e9', '#ffffff', '#FFA500', '#FF4500']
+    });
+
+    // Chamada para repetir o efeito após 500ms
+    setTimeout(() => {
+        myConfetti({
+            particleCount: 50, 
+            spread: 80,
+            origin: { y: 0, x: 0.5 },
+            gravity: 0.7,
+            ticks: 300,
+            colors: ['#2dd3e9', '#ffffff', '#FFA500', '#FF4500']
+        });
+    }, 500); 
 }
