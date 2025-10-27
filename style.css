@@ -1,10 +1,11 @@
 /* Variáveis para fácil personalização */
 :root {
-    --fundo-principal: #010436; 
-    --cor-texto: #ffffff;
-    --cor-secundaria: #011947; 
-    --cor-destaque: #ec781a;
-    --cor-titulos: #1a7cec;  
+    /* NOVO TEMA: Dark Blue Theme */
+    --fundo-principal: #0F1626;      /* Fundo muito escuro, quase preto-azulado */
+    --cor-secundaria: #1C2B40;      /* Fundo dos cards (azul escuro) */
+    --cor-destaque: #00BCD4;        /* Cor de destaque (Ciano/Azul claro) */
+    --cor-titulos: #2dd3e9;
+    --cor-texto: #ffffff; 
     --padding-geral: 2rem; /* 32px */
     --gap-geral: 1rem; 
     --borda-raio: .8rem; 

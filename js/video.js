@@ -2,7 +2,18 @@
 const VIDEO_URLS = [
     'videos/01.mp4',
     'videos/02.mp4',
-    'videos/03.mp4'
+    'videos/03.mp4',
+    'videos/04.mp4',
+    'videos/05.mp4',
+    'videos/06.mp4',
+    'videos/07.mp4',
+    'videos/08.mp4',
+    'videos/09.mp4',
+    'videos/10.mp4',
+    'videos/11.mp4',
+    'videos/12.mp4',
+    'videos/13.mp4',
+    'videos/14.mp4'
 ];
 
 let videoIndex = 0;

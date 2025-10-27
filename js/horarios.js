@@ -30,8 +30,8 @@ function loadHorarios() {
     const horaHK = formatarHora(agora, fuso_hk);
 
     // Ajuste no DOM para um visual melhor
-    document.getElementById('hora-brasil').innerHTML = `**Brasília:** ${horaBrasil}`;
-    document.getElementById('hora-ny').innerHTML = `**New York:** ${horaNY}`;
-    document.getElementById('hora-hk').innerHTML = `**Hong Kong:** ${horaHK}`;
+    document.getElementById('hora-brasil').innerHTML = `Brasília: ${horaBrasil}`;
+    document.getElementById('hora-ny').innerHTML = `New York: ${horaNY}`;
+    document.getElementById('hora-hk').innerHTML = `Hong Kong: ${horaHK}`;
 }
 // O intervalo de 1s já será feito no index.html
