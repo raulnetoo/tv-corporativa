@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Corporativa Moderna</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="grid-container">
+        <section class="not_interna" id="secao-noticia">
+            <div class="conteudo-noticia">
+                <img id="noticia-imagem" src="placeholder.jpg" alt="Imagem da Notícia">
+                <h3 id="noticia-titulo">Carregando Notícia...</h3>
+                <p id="noticia-texto"></p>
+            </div>
+        </section>
+
+        <section class="video" id="secao-video">
+            <div id="video-container" class="embed-container">
+                <p>Carregando Vídeo...</p>
+            </div>
+        </section>
+
+        <section class="aniversariante" id="secao-aniversariante">
+            <div class="avatar-aniversariante">
+                <img id="aniversariante-foto" src="https://via.placeholder.com/100?text=TV" alt="Foto Aniversariante">
+                <span class="icone-presente"><i class="fas fa-gift"></i></span>
+            </div>
+            <h3 id="aniversariante-nome">Carregando...</h3>
+            <p id="aniversariante-data"></p>
+            <p id="aniversariante-setor"></p>
+        </section>
+
+        <section class="dollar_hoje" id="secao-cambio">
+            <h3><i class="fas fa-dollar-sign"></i> Câmbio</h3>
+            <div id="cambio-valor">Carregando...</div>
+        </section>
+
+        <section class="hora_mundial" id="secao-horarios">
+            <h3><i class="far fa-clock"></i> Horários</h3>
+            <div id="hora-brasil"></div>
+            <div id="hora-ny"></div>
+            <div id="hora-hk"></div>
+        </section>
+
+        <section class="prev_tempo" id="secao-tempo">
+            <h3><i class="fas fa-cloud-sun"></i> Tempo</h3>
+            <div id="tempo-local">São José do Rio Preto</div>
+            <div id="tempo-temp">Carregando...</div>
+            <div id="tempo-descricao"></div>
+            <div id="tempo-previsao-lista"></div>
+        </section>
+    </div>
+
+<script src="js/sheets_config.js"></script>
+<script src="js/aniversariante.js"></script>
+<script src="js/noticia.js"></script>
+<script src="js/video.js"></script>
+<script src="js/cambio.js"></script>
+<script src="js/horarios.js"></script>
+<script src="js/tempo.js"></script>
+
+<script>
+    // ... (Suas outras chamadas e setIntervals) ...
+    
+    // Adicione esta linha temporária para debug:
+    fetchSheetData('Noticia').then(data => console.log("Dados Notícia Carregados:", data));
+    fetchSheetData('Aniversariante').then(data => console.log("Dados Aniversariante Carregados:", data));
+</script>
+    
+<script>
+    // Definição do tempo de atualização
+    const ATUALIZACAO_MINUTOS = 2; // Tempo que a tela vai buscar dados novos no Google Sheet
+    const ATUALIZACAO_MS = ATUALIZACAO_MINUTOS * 60 * 1000; // 2 minutos = 120000 ms
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Chamadas iniciais
+        fetchAniversariantesDoMes();
+        fetchNoticias();
+        loadVideo();
+        fetchCambioData();
+        loadHorarios();
+        loadTempo();
+    });
+
+    // 1. Horário em tempo real (a cada segundo)
+    setInterval(loadHorarios, 1000); 
+
+    // 2. Atualização dos dados do Google Sheet e APIs a cada 2 minutos
+    setInterval(() => {
+        // Estes buscam novos dados do seu Google Sheet
+        fetchAniversariantesDoMes(); 
+        fetchNoticias();
+        
+        // Estes buscam novos dados das APIs (Câmbio e Tempo)
+        fetchCambioData(); 
+        loadTempo();
+        
+        console.log(`Dados atualizados do Google Sheets e APIs: ${ATUALIZACAO_MINUTOS} minutos.`);
+        
+    }, ATUALIZACAO_MS); // Intervalo de 2 minutos (ou o que você preferir)
+    
+    // Adicione esta linha no final do seu bloco <script> principal, logo antes da tag 
+// A cada 6 horas, forçamos a recarga total da página para limpar cache e garantir a estabilidade.
+setInterval(() => { window.location.reload(); }, 6 * 60 * 60 * 1000);
+
+</script>
+</body>
+</html>

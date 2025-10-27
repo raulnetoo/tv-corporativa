@@ -1,0 +1,232 @@
+/* Variáveis para fácil personalização */
+:root {
+    --fundo-principal: #121212; 
+    --cor-texto: #ffffff;
+    --cor-secundaria: #1e1e1e; 
+    --cor-destaque: #e406c1; 
+    --padding-geral: 2rem; /* 32px */
+    --gap-geral: 1rem; 
+    --borda-raio: .8rem; 
+    --borda-raio-destaque: 1.5rem; 
+    
+    /* CORREÇÃO PARA 2rem TOP E 2rem BOTTOM: (Top: 2rem + Bottom: 2rem) = 4rem */
+    --total-padding-vertical: 4rem;
+}
+
+body {
+    background-color: var(--fundo-principal);
+    color: var(--cor-texto);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    overflow: hidden; 
+    height: 100vh;
+}
+
+/* Estrutura do Grid (Corrigido para o espaçamento) */
+.grid-container {
+    /* Subtrai o padding vertical total (4rem) do 100vh */
+    height: calc(100vh - var(--total-padding-vertical)); 
+    
+    gap: var(--gap-geral);
+    /* Aplica 2rem em todas as direções (Topo, Direita, Fundo, Esquerda) */
+    padding: var(--padding-geral); 
+    
+    display: grid;
+    grid-template-rows: repeat(6, 1fr); 
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.grid-container > section {
+    padding: var(--padding-geral);
+    border-radius: var(--borda-raio);
+    background-color: var(--cor-secundaria);
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+/* ----------------------------------- */
+/* Mapeamento do Layout do Grid (A, B, C, D, E, F) */
+/* ----------------------------------- */
+
+.not_interna {
+    grid-row: 1/6;
+    grid-column: 1/3;
+}
+
+.video {
+    grid-row: 1/6;
+    grid-column: 3/7;
+    padding: 0; 
+    overflow: hidden;
+    border-radius: var(--borda-raio); 
+}
+
+.aniversariante {
+    grid-row: 6/7;
+    grid-column: 1/3;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    text-align: center;
+}
+
+.dollar_hoje {
+    grid-row: 6/7;
+    grid-column: 3/4;
+    justify-content: center;
+    text-align: center;
+}
+
+.hora_mundial {
+    grid-row: 6/7;
+    grid-column: 4/5;
+}
+
+.prev_tempo {
+    grid-row: 6/7;
+    grid-column: 5/7;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 0.5rem;
+}
+
+/* ----------------------------------- */
+/* Ajuste para Arredondamento da Última Linha */
+/* ----------------------------------- */
+.aniversariante,
+.dollar_hoje,
+.hora_mundial,
+.prev_tempo {
+    /* Aplica o raio maior apenas nos cantos inferiores */
+    border-bottom-left-radius: var(--borda-raio-destaque);
+    border-bottom-right-radius: var(--borda-raio-destaque);
+}
+
+/* ----------------------------------- */
+/* Estilos dos Componentes */
+/* ----------------------------------- */
+
+/* Notícia */
+.not_interna .conteudo-noticia {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+}
+
+.not_interna img {
+    max-width: 80%;
+    max-height: 50%;
+    object-fit: contain;
+    border-radius: var(--borda-raio);
+    margin-bottom: 1rem;
+}
+
+/* Vídeo */
+.embed-container {
+    position: relative;
+    padding-bottom: 56.25%; 
+    height: 100%;
+    width: 100%;
+}
+.embed-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--borda-raio); 
+}
+
+/* Aniversariante */
+.avatar-aniversariante {
+    position: relative;
+    width: 150px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.avatar-aniversariante img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--cor-destaque);
+}
+.icone-presente {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: var(--cor-destaque);
+    border-radius: 50%;
+    padding: 0.5rem;
+    line-height: 1;
+}
+
+/* Câmbio e Horários */
+.dollar_hoje h3, .hora_mundial h3 {
+    text-align: center;
+    margin-top: 0;
+    color: var(--cor-destaque);
+}
+#cambio-valor {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #4CAF50; 
+}
+#cambio-valor small {
+    font-size: 1rem;
+    color: var(--cor-texto);
+}
+
+/* Horários */
+.hora_mundial > div { 
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Previsão do Tempo */
+#tempo-local {
+    grid-column: 1/3;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--cor-destaque);
+}
+
+#tempo-temp {
+    font-size: 3rem;
+    font-weight: bold;
+    line-height: 1;
+}
+
+#tempo-descricao {
+    font-size: 1.2rem;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#tempo-previsao-lista {
+    grid-column: 1/3;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+}
+
+.previsao-dia {
+    text-align: center;
+    font-size: 0.8rem;
+}
+.previsao-dia i {
+    font-size: 1.5rem;
+    margin: 0.2rem 0;
+}
