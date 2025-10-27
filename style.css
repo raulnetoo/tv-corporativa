@@ -240,7 +240,7 @@ body {
 
 #tempo-descricao {
     /* Ícone e texto ficam alinhados à direita */
-    font-size: 4rem; 
+    font-size: 2.5em; 
     align-self: center;
     display: flex;
     flex-direction: column;
@@ -266,7 +266,7 @@ body {
 }
 
 .previsao-dia {
-    font-size: 1.5rem;
+    font-size: 0.8rem;
     margin: 0.2rem 0;
     color: var(--cor-destaque); /* <<--- ISSO PRECISA SER REMOVIDO/COMENTADO */
 }
