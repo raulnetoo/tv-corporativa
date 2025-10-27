@@ -1,8 +1,8 @@
 // Lista de URLs dos seus vídeos MP4 (Ajuste este array)
 const VIDEO_URLS = [
-    'videos/institucional_1.mp4',
-    'videos/institucional_2.mp4',
-    'videos/institucional_3.mp4'
+    'videos/01.mp4',
+    'videos/02.mp4',
+    'videos/03.mp4'
 ];
 
 let videoIndex = 0;
