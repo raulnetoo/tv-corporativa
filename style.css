@@ -240,7 +240,7 @@ body {
 
 #tempo-descricao {
     /* Ícone e texto ficam alinhados à direita */
-    font-size: 1.5rem; 
+    font-size: 4rem; 
     align-self: center;
     display: flex;
     flex-direction: column;
