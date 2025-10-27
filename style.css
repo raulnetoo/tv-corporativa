@@ -265,8 +265,9 @@ body {
 }
 
 .previsao-dia {
-    text-align: center;
-    font-size: 0.8rem;
+    font-size: 1.5rem;
+    margin: 0.2rem 0;
+    color: var(--cor-destaque); /* <<--- ISSO PRECISA SER REMOVIDO/COMENTADO */
 }
 .previsao-dia i {
     font-size: 1.5rem;
