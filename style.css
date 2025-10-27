@@ -2,7 +2,7 @@
 :root {
     /* NOVO TEMA: Dark Blue Theme */
     --fundo-principal: #0F1626;      /* Fundo muito escuro, quase preto-azulado */
-    --cor-secundaria: #1C2B40;      /* Fundo dos cards (azul escuro) */
+    --cor-secundaria: #00000081;      /* Fundo dos cards (azul escuro) */
     --cor-destaque: #00BCD4;        /* Cor de destaque (Ciano/Azul claro) */
     --cor-titulos: #2dd3e9;         /* Títulos (Ciano mais claro) */
     --cor-texto: #ffffff; 
@@ -16,7 +16,8 @@
 }
 
 body {
-    background-color: var(--fundo-principal);
+    /*background-color: var(--fundo-principal);*/
+    background: url(/imgs/fundo/fun01.jpg) no-repeat center center / cover;
     color: var(--cor-texto);
     font-family: Arial, sans-serif;
     margin: 0;

@@ -53,7 +53,7 @@ function displayProximoCambio() {
     // Atualiza o DOM
     document.getElementById('secao-cambio').innerHTML = `
         <h3><i class="${moedaConfig.icone}"></i> ${moedaConfig.nome} Hoje:</h3>
-        <div id="cambio-valor" style="color: ${tipoValor ? '#FF9800' : '#4ca8afff'};">
+        <div id="cambio-valor" style="color: ${tipoValor ? '#ffffffff' : '#ffffffff'};">
             ${tipoValor} ${valor} 
         </div>
         <p style="font-size: 1.2rem; color: ${corVariacao}; margin-top: 0.5rem;">
