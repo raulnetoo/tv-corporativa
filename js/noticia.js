@@ -8,26 +8,31 @@ let loopInterval; // Variável para controlar o setInterval
 
 async function fetchNoticias() {
     try {
-        // Busca todos os dados da aba 'Noticia'
-        noticiasList = await fetchSheetData('Noticia'); 
+        const novosDados = await fetchSheetData('Noticia'); 
         
-        if (noticiasList.length === 0) {
+        if (novosDados.length === 0) {
             document.getElementById('noticia-titulo').textContent = 'Sem Notícias para Exibir';
             document.getElementById('noticia-texto').textContent = 'Verifique a aba Noticia no Google Sheets.';
             document.getElementById('noticia-imagem').src = 'placeholder.jpg';
+            
+            if (loopInterval) {
+                clearInterval(loopInterval);
+            }
             return;
         }
 
-        // Limpa o loop antigo (necessário para quando busca novos dados a cada 2 minutos)
+        noticiasList = novosDados;
+
+        // 1. Limpa o loop antigo (necessário para a atualização a cada 2 minutos)
         if (loopInterval) {
             clearInterval(loopInterval);
         }
 
-        // Reseta o índice e exibe a primeira notícia
+        // 2. Reseta o índice e exibe a primeira notícia
         noticiaIndex = 0;
         displayProximaNoticia(); 
         
-        // Inicia o novo loop
+        // 3. Inicia o novo loop
         loopInterval = setInterval(displayProximaNoticia, SLIDE_DURATION);
 
     } catch (error) {
@@ -43,7 +48,6 @@ function displayProximaNoticia() {
 
     const itemAtual = noticiasList[noticiaIndex];
 
-    // ATENÇÃO: Verifique no seu JSON que as chaves estão exatamente assim:
     const titulo = itemAtual.titulo || 'Título Padrão';
     const texto = itemAtual.descricao || 'Descrição Padrão.';
     const imagemUrl = itemAtual.imagem_url || 'placeholder.jpg'; 
@@ -56,5 +60,3 @@ function displayProximaNoticia() {
     // Avança para a próxima, voltando para o início (loop)
     noticiaIndex = (noticiaIndex + 1) % noticiasList.length;
 }
-
-// Nota: A chamada 'fetchNoticias()' deve estar no seu index.html

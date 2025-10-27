@@ -5,6 +5,8 @@ let aniversarianteIndex = 0;
 const BASE_DURATION = 10000; // 10 segundos para item normal
 const EXTRA_DELAY = 10000;  // 10 segundos adicionais para o último item (total de 20s)
 
+let loopTimeout; // Usa setTimeout em vez de setInterval
+
 // Função utilitária para extrair o dia e o mês (DD, MM) de uma string de data ISO.
 function parseAniversario(isoString) {
     if (!isoString) return null;
@@ -12,13 +14,11 @@ function parseAniversario(isoString) {
     const date = new Date(isoString);
     
     if (isNaN(date.getTime())) {
-        // Tenta fallback para data simples DD/MM se a ISO falhar (redundância)
         const match = String(isoString).match(/(\d{1,2})\/(\d{1,2})/);
         if (match) return [Number(match[1]), Number(match[2])];
         return null;
     }
 
-    // Usa Intl.DateTimeFormat para extrair dia e mês de forma segura e local
     const options = { day: '2-digit', month: '2-digit', timeZone: 'UTC' };
     const formatter = new Intl.DateTimeFormat('pt-BR', options);
     const parts = formatter.formatToParts(date);
@@ -47,10 +47,8 @@ async function fetchAniversariantesDoMes() {
                 
                 const [diaAniversario, mesAniversario] = dataPartes;
                 
-                // Filtra apenas se o mês for o atual
                 return mesAniversario === mesHoje;
             })
-            // Ordena pelo dia do aniversário (para exibir em ordem cronológica)
             .sort((a, b) => {
                 const diaA = parseAniversario(a.aniversario)?.[0] || 99;
                 const diaB = parseAniversario(b.aniversario)?.[0] || 99;
@@ -60,6 +58,11 @@ async function fetchAniversariantesDoMes() {
         if (aniversariantesDoMesList.length === 0) {
             displaySemAniversariante(nomeMesMaiusculo);
             return;
+        }
+        
+        // Limpa o loop anterior (se estiver ativo)
+        if (loopTimeout) {
+            clearTimeout(loopTimeout);
         }
         
         startAniversarianteLoop(); 
@@ -91,7 +94,6 @@ function displayAniversariante() {
     
     const [diaAniversario, mesAniversario] = dataPartes;
 
-    // Obtém o nome do mês a partir do número do mês 
     const dataMes = new Date(2000, mesAniversario - 1, 1); 
     const nomeMes = new Intl.DateTimeFormat('pt-BR', { month: 'long' }).format(dataMes);
     const nomeMesMaiusculo = nomeMes.charAt(0).toUpperCase() + nomeMes.slice(1);
@@ -102,7 +104,8 @@ function displayAniversariante() {
     document.getElementById('aniversariante-data').textContent = `Dia ${diaAniversario} de ${nomeMesMaiusculo}`;
     document.getElementById('aniversariante-setor').textContent = `Setor: ${dados.setor}`;
     document.getElementById('aniversariante-foto').src = dados.foto_url; 
-    document.getElementById('secao-aniversariante').style.backgroundColor = '#4CAF50'; 
+    // Cor customizada pelo usuário
+    document.getElementById('secao-aniversariante').style.backgroundColor = '#79afceff'; 
 }
 
 
@@ -123,11 +126,12 @@ function startAniversarianteLoop() {
         // 4. Determinar o delay para a próxima exibição
         let delay = BASE_DURATION;
         if (isLastItem) {
-            delay += EXTRA_DELAY; // 20000ms total (10s item + 10s extra)
+            delay += EXTRA_DELAY; // Total de 20s no último item
         }
 
         // 5. Agendar a próxima execução do loop
-        setTimeout(loopCycle, delay);
+        // Usa a variável global loopTimeout
+        loopTimeout = setTimeout(loopCycle, delay);
     }
     
     // Inicia o ciclo
