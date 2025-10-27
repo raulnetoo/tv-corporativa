@@ -1,5 +1,5 @@
 // ATENÇÃO: Substitua pela sua chave API da OpenWeatherMap
-const OPENWEATHER_API_KEY = 'SUA_CHAVE_API_OPENWEATHERMAP'; 
+const OPENWEATHER_API_KEY = '663757f8b7d193f0b4d8c80a07e0202e'; 
 // Substitua pelas coordenadas da sua cidade (Ex: São José do Rio Preto)
 const LAT = '-20.8222'; 
 const LON = '-49.3875'; 
