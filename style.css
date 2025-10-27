@@ -246,12 +246,13 @@ body {
     align-items: flex-end; /* Alinha o conteúdo à direita (Ícone/Texto) */
     justify-content: center;
     text-align: right;
-    line-height: 1.2;
+    line-height: 1;
 }
 
 #tempo-descricao i {
     font-size: 2.5rem; /* Aumenta o tamanho do ícone */
     color: var(--cor-destaque);
+    margin-bottom: -0.5rem;
 }
 
 /* Lista de Previsão de Dias */
