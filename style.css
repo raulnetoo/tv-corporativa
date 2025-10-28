@@ -266,11 +266,16 @@ body {
 #cambio-valor {
     font-size: 2.5rem;
     font-weight: bold;
-    color: #4CAF50; 
 }
 #cambio-valor small {
     font-size: 1rem;
     color: var(--cor-texto);
+}
+
+/* Garante que o texto de câmbio está centralizado */
+#secao-cambio {
+    text-align: center; 
+    /* Já deve estar com justify-content: center; e text-align: center; devido a .dollar_hoje */
 }
 
 /* Horários */
