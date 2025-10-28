@@ -17,7 +17,7 @@
 
 body {
     /*background-color: var(--fundo-principal);*/
-    background: url(/imgs/fundo/fun01.jpg) no-repeat center center / cover;
+    background: url(imgs/fundo/fun01.jpg) no-repeat center center / cover;
     color: var(--cor-texto);
     font-family: Arial, sans-serif;
     margin: 0;
