@@ -184,33 +184,44 @@ function startAniversarianteLoop() {
 }
 
 function shootConfetti() {
-    // 1. Pega o elemento canvas
     const confettiCanvas = document.getElementById('confetti-canvas');
     if (!confettiCanvas) return;
 
-    // 2. Cria uma instância de confete vinculada a esse canvas
-    // A variável global 'confetti' é injetada pelo script CDN
-    const myConfetti = confetti.create(confettiCanvas, { resize: true });
+    // Cria uma instância de confete vinculada a esse canvas
+    const myConfetti = confetti.create(confettiCanvas, { 
+        resize: true,
+        // Adicionamos 'useDpr: true' para melhor qualidade em telas de alta densidade
+        useDpr: true 
+    });
+
+    // Cores personalizadas (Ex: Cores da sua identidade visual ou cores vibrantes de festa)
+    // Cores: Ciano/Azul (var(--cor-destaque)), Branco, Dourado, Rosa Choque
+    const coresFesta = ['#2dd3e9', '#ffffff', '#FFD700', '#FF1493'];
 
     // 3. Dispara a chuva de confete (Personalize conforme quiser)
 myConfetti({
-        particleCount: 50, 
-        spread: 80,
-        origin: { y: 0, x: 0.5 },
-        gravity: 0.7,
-        ticks: 300, // Mais longo
-        colors: ['#2dd3e9', '#ffffff', '#FFA500', '#FF4500']
+        particleCount: 80,         // Quantidade razoável
+        spread: 70,                // Dispersão média
+        startVelocity: 40,         // Velocidade de início mais alta
+        decay: 0.9,                // Decaimento padrão
+        gravity: 0.8,              // Gravidade padrão
+        ticks: 250,                // Duração média (2.5 segundos)
+        origin: { y: 0.2, x: 0.5 },// Origem um pouco abaixo do topo para simular a queda
+        colors: coresFesta
     });
 
     // Chamada para repetir o efeito após 500ms
-    setTimeout(() => {
+setTimeout(() => {
         myConfetti({
-            particleCount: 50, 
-            spread: 80,
-            origin: { y: 0, x: 0.5 },
-            gravity: 0.7,
-            ticks: 300,
-            colors: ['#2dd3e9', '#ffffff', '#FFA500', '#FF4500']
+            particleCount: 120,        // Mais confetes na segunda onda
+            spread: 120,               // Mais espalhados, cobrindo melhor o container
+            startVelocity: 25,         // Velocidade mais baixa (parece que estão caindo)
+            decay: 0.92,               // Decaimento um pouco mais lento
+            gravity: 0.6,              // Gravidade um pouco menor (cai mais devagar)
+            ticks: 350,                // Duração mais longa (3.5 segundos)
+            origin: { y: 0, x: 0.5 },  // Origem no topo central
+            colors: coresFesta,
+            shapes: ['circle', 'square'] // Adiciona formas diferentes
         });
-    }, 500); 
+    }, 500); // 500ms depois da primeira onda
 }
