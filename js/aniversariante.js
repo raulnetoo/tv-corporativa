@@ -195,15 +195,15 @@ function shootConfetti() {
     const coresFesta = ['#2dd3e9', '#ffffff', '#FFD700', '#FF1493'];
 
     // NOVO: Parâmetros ajustáveis para 4K
-    let particleScalar = 1;
-    let baseVelocity = 40;
-    let secondWaveDelay = 500;
+    let particleScalar = 1; //tamanho
+    let baseVelocity = 40; //velocidade
+    let secondWaveDelay = 500; //delay
 
     // Detecta se estamos em uma tela grande (4K ou similar)
     if (window.innerWidth >= 3000 && window.innerHeight >= 1800) {
         particleScalar = 2; // Torna os confetes 2x maiores
-        baseVelocity = 50;    // Lança os confetes mais alto e rápido
-        secondWaveDelay = 800; // Atraso maior entre as ondas para um efeito mais longo
+        baseVelocity = 55;    // Lança os confetes mais alto e rápido
+        secondWaveDelay = 500; // Atraso maior entre as ondas para um efeito mais longo
     }
 
 // --- Onda 1: Confetes mais concentrados e rápidos (efeito de "lançamento") ---
