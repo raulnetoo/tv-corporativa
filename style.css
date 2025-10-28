@@ -58,12 +58,22 @@ body {
     grid-column: 1/3;
 }
 
+.not_interna .conteudo-noticia {
+    /* ... */
+    align-items: center; 
+    text-align: center;
+}
+
 .video {
     grid-row: 1/6;
     grid-column: 3/7;
     padding: 0; 
     overflow: hidden;
     border-radius: var(--borda-raio); 
+    /* MANTIDO: ESSENCIAL PARA CENTRALIZAR */
+    display: flex; 
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;     /* Centraliza verticalmente */
 }
 
 .aniversariante {
@@ -197,9 +207,20 @@ body {
 /* Vídeo */
 .embed-container {
     position: relative;
-    padding-bottom: 56.25%; 
-    height: 100%;
-    width: 100%;
+    /* Remover ou comentar o padding-bottom padrão pode ajudar na centralização vertical */
+    /* padding-bottom: 56.25%; */ 
+    
+    /* NOVO: Garante que o container ocupe a altura MÁXIMA da seção */
+    height: 100%; 
+    /* Garante que o container ocupe a largura MÁXIMA da seção */
+    width: 100%; 
+    
+    /* NOVO: Usaremos um truque CSS para manter o Aspect Ratio 16:9 */
+    max-width: 100%;
+    /* Altura máxima baseada no aspecto 16:9 da largura MÁXIMA */
+    max-height: calc(100vw / (6 / 4) * 0.5625); 
+    /* A altura do vídeo é 9/16 (0.5625) de sua largura. 
+       A largura do grid é 4/6 do viewport. Isso é complexo demais. */
 }
 .embed-container iframe {
     position: absolute;
@@ -328,4 +349,131 @@ body {
     font-size: 1.5rem;
     margin: 0.2rem 0;
     color: var(--cor-destaque);
+}
+
+/* =================================== */
+/* NOVO AJUSTE: AJUSTES PARA TELAS 4K (3840x2160) */
+/* Espaçamento reduzido para caber o vídeo */
+/* =================================== */
+
+@media screen and (min-width: 3000px) and (min-height: 1800px) {
+    /* Aumenta o tamanho da fonte base do HTML para escalar todas as unidades REM */
+    /* 1rem padrão = 16px. Aqui, 1rem = 30px (quase 2x o padrão) */
+    html {
+        font-size: 187.5%; /* Isso torna 1rem = 30px */
+    }
+
+    /* Reduzindo o espaçamento (padding e gap) para caber o grid na tela 4K */
+    :root {
+        --padding-geral: 2.5rem; /* Antes 4rem. Reduzido para 2.5rem (75px) */
+        --gap-geral: 1.5rem;     /* Antes 2.5rem. Reduzido para 1.5rem (45px) */
+        --borda-raio: 1.2rem; 
+        --borda-raio-destaque: 2rem; 
+        --total-padding-vertical: 5rem; /* 2.5rem top + 2.5rem bottom */
+    }
+
+    /* Grid Container: Aplica os novos paddings e gaps */
+    .grid-container {
+        padding: var(--padding-geral);
+        gap: var(--gap-geral);
+        height: calc(100vh - var(--total-padding-vertical)); 
+    }
+    
+    /* Títulos: Aumenta o tamanho dos títulos principais */
+    .grid-container h3 {
+        font-size: 1.6rem; /* Será 48px */
+    }
+
+    /* Notícia: Aumenta o tamanho da imagem e garante centralização */
+    .not_interna img {
+        max-width: 90%; 
+        max-height: 60%; 
+    }
+    .not_interna p {
+        font-size: 1rem; /* Será 30px */
+    }
+
+    /* =================================== */
+    /* Aniversariante */
+    /* =================================== */
+    .aniversariante {
+        justify-content: space-around; 
+        align-items: center; 
+    }
+
+    .avatar-aniversariante {
+        width: 12rem; /* Reduzido para caber melhor */
+    }
+    .avatar-aniversariante img {
+        width: 8rem; /* Será 240px */
+        height: 8rem; 
+        border: 5px solid var(--cor-destaque);
+    }
+    .icone-presente {
+        right: 1rem;
+        bottom: 1rem;
+        padding: 0.6rem;
+        font-size: 1.2rem; 
+    }
+    
+    .aniversariante h3 {
+        font-size: 1.8rem; /* Nome: 54px */
+    }
+    .aniversariante p {
+        font-size: 1rem; /* Data/Setor: 30px */
+    }
+
+    /* =================================== */
+    /* Câmbio, Horários e Tempo (DIMINUÍDOS) */
+    /* =================================== */
+    
+    /* Câmbio */
+    #cambio-valor {
+        font-size: 3.5rem; /* Valor Dólar: 105px (Antes 5rem) */
+        /* Centraliza o texto verticalmente, se necessário */
+        line-height: 1.2; 
+        margin-top: 0.5rem; 
+    }
+    #cambio-valor small {
+        font-size: 1.2rem; /* Rótulo Dólar: 36px */
+    }
+    
+    /* Horários */
+    .hora_mundial > div { 
+        font-size: 1.2rem; /* Horários: 36px (Antes 1.5rem) */
+        margin-bottom: 0.8rem;
+    }
+    .hora_mundial small {
+        font-size: 0.8rem; /* Data/Fuso: 24px */
+    }
+
+    /* Previsão do Tempo */
+    #tempo-local {
+        font-size: 1.2rem; /* Local: 36px */
+    }
+    
+    #tempo-temp {
+        font-size: 5rem; /* Temperatura: 150px (Antes 8rem) */
+    }
+
+    #tempo-descricao {
+        font-size: 2.5rem; /* Descrição (texto e ícone) (Antes 4rem) */
+    }
+    
+    #tempo-descricao i {
+        font-size: 3rem; /* Ícone do tempo (Antes 5rem) */
+    }
+
+    /* Previsão de Dias */
+    .previsao-dia {
+        font-size: 0.9rem; 
+    }
+    .previsao-dia i {
+        font-size: 1.5rem; 
+    }
+    
+    /* Garante que o conteúdo de todos os grids está centralizado verticalmente */
+    .grid-container > section {
+        justify-content: center; 
+    }
 }
