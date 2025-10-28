@@ -201,8 +201,8 @@ function shootConfetti() {
 
     // Detecta se estamos em uma tela grande (4K ou similar)
     if (window.innerWidth >= 3000 && window.innerHeight >= 1800) {
-        particleScalar = 2.5; // Torna os confetes 2.5x maiores
-        baseVelocity = 65;    // Lança os confetes mais alto e rápido
+        particleScalar = 2; // Torna os confetes 2x maiores
+        baseVelocity = 50;    // Lança os confetes mais alto e rápido
         secondWaveDelay = 800; // Atraso maior entre as ondas para um efeito mais longo
     }
 
