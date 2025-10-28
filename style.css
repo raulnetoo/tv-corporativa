@@ -429,7 +429,7 @@ body {
     
     /* Câmbio */
     #cambio-valor {
-        font-size: 3.5rem; /* Valor Dólar: 105px (Antes 5rem) */
+        font-size: 2.5rem; /* Valor Dólar: 105px (Antes 5rem) */
         /* Centraliza o texto verticalmente, se necessário */
         line-height: 1.2; 
         margin-top: 0.5rem; 

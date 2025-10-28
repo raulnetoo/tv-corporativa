@@ -187,41 +187,52 @@ function shootConfetti() {
     const confettiCanvas = document.getElementById('confetti-canvas');
     if (!confettiCanvas) return;
 
-    // Cria uma instância de confete vinculada a esse canvas
     const myConfetti = confetti.create(confettiCanvas, { 
         resize: true,
-        // Adicionamos 'useDpr: true' para melhor qualidade em telas de alta densidade
         useDpr: true 
     });
 
-    // Cores personalizadas (Ex: Cores da sua identidade visual ou cores vibrantes de festa)
-    // Cores: Ciano/Azul (var(--cor-destaque)), Branco, Dourado, Rosa Choque
     const coresFesta = ['#2dd3e9', '#ffffff', '#FFD700', '#FF1493'];
 
-    // 3. Dispara a chuva de confete (Personalize conforme quiser)
-myConfetti({
-        particleCount: 80,         // Quantidade razoável
-        spread: 70,                // Dispersão média
-        startVelocity: 40,         // Velocidade de início mais alta
-        decay: 0.9,                // Decaimento padrão
-        gravity: 0.8,              // Gravidade padrão
-        ticks: 250,                // Duração média (2.5 segundos)
-        origin: { y: 0.2, x: 0.5 },// Origem um pouco abaixo do topo para simular a queda
-        colors: coresFesta
+    // NOVO: Parâmetros ajustáveis para 4K
+    let particleScalar = 1;
+    let baseVelocity = 40;
+    let secondWaveDelay = 500;
+
+    // Detecta se estamos em uma tela grande (4K ou similar)
+    if (window.innerWidth >= 3000 && window.innerHeight >= 1800) {
+        particleScalar = 2.5; // Torna os confetes 2.5x maiores
+        baseVelocity = 65;    // Lança os confetes mais alto e rápido
+        secondWaveDelay = 800; // Atraso maior entre as ondas para um efeito mais longo
+    }
+
+// --- Onda 1: Confetes mais concentrados e rápidos (efeito de "lançamento") ---
+    myConfetti({
+        particleCount: 80,         
+        spread: 70,                
+        startVelocity: baseVelocity, // Usa a velocidade ajustada
+        decay: 0.9,                
+        gravity: 0.8,              
+        ticks: 250,                
+        origin: { y: 0.2, x: 0.5},
+        colors: coresFesta,
+        scalar: particleScalar     // Aplica o novo tamanho
     });
 
-    // Chamada para repetir o efeito após 500ms
-setTimeout(() => {
+// --- Onda 2: Confetes mais espalhados e lentos (efeito de "chuva") ---
+    // Repetição para alongar o efeito de confete
+    setTimeout(() => {
         myConfetti({
-            particleCount: 120,        // Mais confetes na segunda onda
-            spread: 120,               // Mais espalhados, cobrindo melhor o container
-            startVelocity: 25,         // Velocidade mais baixa (parece que estão caindo)
-            decay: 0.92,               // Decaimento um pouco mais lento
-            gravity: 0.6,              // Gravidade um pouco menor (cai mais devagar)
-            ticks: 350,                // Duração mais longa (3.5 segundos)
-            origin: { y: 0, x: 0.5 },  // Origem no topo central
+            particleCount: 120,        
+            spread: 120,               
+            startVelocity: baseVelocity * 0.6, // Velocidade menor para a chuva
+            decay: 0.92,               
+            gravity: 0.6,              
+            ticks: 350,                
+            origin: { y: 0, x: 0.5 },  
             colors: coresFesta,
-            shapes: ['circle', 'square'] // Adiciona formas diferentes
+            shapes: ['circle', 'square'],
+            scalar: particleScalar     // Aplica o novo tamanho
         });
-    }, 500); // 500ms depois da primeira onda
+    }, secondWaveDelay); // Usa o atraso ajustado
 }
