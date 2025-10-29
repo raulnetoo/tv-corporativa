@@ -264,7 +264,7 @@ body {
     color: var(--cor-titulos);
 }
 #cambio-valor {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 #cambio-valor small {
