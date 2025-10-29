@@ -64,9 +64,9 @@
 <script src="js/noticia.js"></script>
 <script src="js/video.js"></script>
 <script src="js/cambio.js"></script>
-<script src="js/tempo.js"></script>
+<script src="js/horarios.js"></script> <script src="js/tempo.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
+    
 <script>
     // Definição do tempo de atualização
     const ATUALIZACAO_MINUTOS = 2; 
@@ -83,21 +83,25 @@
         if (typeof fetchNoticias === 'function') fetchNoticias();
         if (typeof loadVideo === 'function') loadVideo();
         if (typeof fetchCambioData === 'function') fetchCambioData();
-        if (typeof loadTempo === 'function') loadTempo();
+        // O relógio NÃO é chamado aqui, pois ele tem seu próprio loop de 1 segundo
+        if (typeof loadTempo === 'function') loadTempo(); 
     }
     
     // Novo bloco de inicialização
     document.addEventListener('DOMContentLoaded', () => {
-        // 1. Inicia o relógio em tempo real (a cada 1s) - Assume que está em tempo.js
-        if (typeof startClockLoop === 'function') {
-            startClockLoop(); 
+        
+        // 1. Inicia o relógio em tempo real (a cada 1s)
+        // Chamamos a função do arquivo horarios.js para iniciar o loop de 1s
+        if (typeof loadHorarios === 'function') {
+            // Chamamos loadHorarios UMA VEZ. Dentro dela, ela deve ter um setInterval(updateHora, 1000)
+            loadHorarios(); 
             console.log("Relógio iniciado.");
         }
         
-        // 2. Primeira carga de todos os outros dados
+        // 2. Primeira carga de todos os outros dados (exceto relógio)
         loadAllData();
         
-        // 3. Loop de atualização dos dados
+        // 3. Loop de atualização dos dados (a cada 2 minutos)
         setInterval(loadAllData, ATUALIZACAO_MS);
         
         // 4. Recarga forçada da página (6 horas)
@@ -108,5 +112,3 @@
     });
 
 </script>
-</body>
-</html>

@@ -205,7 +205,7 @@ function shootConfetti() {
     let secondWaveDelay = 500; 
 
     if (window.innerWidth >= 3000 && window.innerHeight >= 1800) {
-        particleScalar = 2; 
+        particleScalar = 2.5; 
         baseVelocity = 55;    
         secondWaveDelay = 500; 
     }
