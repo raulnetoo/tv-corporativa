@@ -64,52 +64,48 @@
 <script src="js/noticia.js"></script>
 <script src="js/video.js"></script>
 <script src="js/cambio.js"></script>
-<script src="js/horarios.js"></script>
 <script src="js/tempo.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-<script>
-    // ... (Suas outras chamadas e setIntervals) ...
-    
-    // Adicione esta linha temporária para debug:
-    fetchSheetData('Noticia').then(data => console.log("Dados Notícia Carregados:", data));
-    fetchSheetData('Aniversariante').then(data => console.log("Dados Aniversariante Carregados:", data));
-</script>
-    
+
 <script>
     // Definição do tempo de atualização
-    const ATUALIZACAO_MINUTOS = 2; // Tempo que a tela vai buscar dados novos no Google Sheet
-    const ATUALIZACAO_MS = ATUALIZACAO_MINUTOS * 60 * 1000; // 2 minutos = 120000 ms
+    const ATUALIZACAO_MINUTOS = 2; 
+    const ATUALIZACAO_MS = ATUALIZACAO_MINUTOS * 60 * 1000;
 
-    document.addEventListener('DOMContentLoaded', () => {
-        // Chamadas iniciais
-        fetchAniversariantesDoMes();
-        fetchNoticias();
-        loadVideo();
-        fetchCambioData();
-        loadHorarios();
-        loadTempo();
-    });
-
-    // 1. Horário em tempo real (a cada segundo)
-    setInterval(loadHorarios, 1000); 
-
-    // 2. Atualização dos dados do Google Sheet e APIs a cada 2 minutos
-    setInterval(() => {
-        // Estes buscam novos dados do seu Google Sheet
-        fetchAniversariantesDoMes(); 
-        fetchNoticias();
+    /**
+     * Função que carrega todos os dados estáticos/API
+     */
+    function loadAllData() {
+        console.log("Carregando todos os dados...");
         
-        // Estes buscam novos dados das APIs (Câmbio e Tempo)
-        fetchCambioData(); 
-        loadTempo();
-        
-        console.log(`Dados atualizados do Google Sheets e APIs: ${ATUALIZACAO_MINUTOS} minutos.`);
-        
-    }, ATUALIZACAO_MS); // Intervalo de 2 minutos (ou o que você preferir)
+        // Chamadas dos seus scripts
+        if (typeof fetchAniversariantesDoMes === 'function') fetchAniversariantesDoMes();
+        if (typeof fetchNoticias === 'function') fetchNoticias();
+        if (typeof loadVideo === 'function') loadVideo();
+        if (typeof fetchCambioData === 'function') fetchCambioData();
+        if (typeof loadTempo === 'function') loadTempo();
+    }
     
-    // Adicione esta linha no final do seu bloco <script> principal, logo antes da tag 
-// A cada 6 horas, forçamos a recarga total da página para limpar cache e garantir a estabilidade.
-setInterval(() => { window.location.reload(); }, 6 * 60 * 60 * 1000);
+    // Novo bloco de inicialização
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. Inicia o relógio em tempo real (a cada 1s) - Assume que está em tempo.js
+        if (typeof startClockLoop === 'function') {
+            startClockLoop(); 
+            console.log("Relógio iniciado.");
+        }
+        
+        // 2. Primeira carga de todos os outros dados
+        loadAllData();
+        
+        // 3. Loop de atualização dos dados
+        setInterval(loadAllData, ATUALIZACAO_MS);
+        
+        // 4. Recarga forçada da página (6 horas)
+        setInterval(() => { 
+            console.log("Recarregando página para garantir a estabilidade...");
+            window.location.reload(); 
+        }, 6 * 60 * 60 * 1000);
+    });
 
 </script>
 </body>
